@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import CardList from "./components/CardList";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { getMovies } from "./utils/movie.util";
+import { getMovies } from "./services/movies.service";
+import { adaptTmdbToMovie } from "./utils/movie.util";
+// import { getMovies } from "./utils/movie.util";
 
 function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const data = getMovies();
-    setData(data);
+    const getData = async () => {
+      const movies = await getMovies();
+      setData(movies.map(adaptTmdbToMovie));
+    };
+    getData();
   }, []);
 
   return (
