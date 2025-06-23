@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CardList from "./components/CardList";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { getMovies } from "./services/movies.service";
-import { adaptTmdbToMovie } from "./utils/movie.util";
-// import { getMovies } from "./utils/movie.util";
+import { useMoviesStore } from "./store/movies.store";
 
 function App() {
-  const [data, setData] = useState([]);
+  const movies = useMoviesStore(state => state.movies);
+  const getMovies = useMoviesStore(state => state.getMovies);
 
   useEffect(() => {
-    const getData = async () => {
-      const movies = await getMovies();
-      setData(movies.map(adaptTmdbToMovie));
-    };
-    getData();
-  }, []);
+    getMovies();
+  }, [getMovies]);
 
   return (
     <>
@@ -24,7 +19,7 @@ function App() {
         <section className="py-4">
           <div className="container">
             <h2 className="text-center fw-bolder">Estrenos</h2>
-            <CardList data={data} />
+            <CardList data={movies} />
           </div>
         </section>
       </main>

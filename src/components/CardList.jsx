@@ -1,5 +1,9 @@
+import { useMoviesStore } from "../store/movies.store";
 
 const CardList = ({ data }) => {
+  const count = useMoviesStore(state => state.count);
+  console.log(count + count);
+
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {data.map((item) => {

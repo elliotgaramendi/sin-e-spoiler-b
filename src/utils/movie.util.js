@@ -1,4 +1,3 @@
-import { tmdbNowPlayingMock } from '../data/movies.data';
 
 export const getImageUrl = (size = 'w342', path) => {
   if (!path) return `https://picsum.photos/${size === 'w342' ? '342/513' : '780/439'}?random`;
@@ -47,6 +46,3 @@ export const adaptTmdbToMovie = tmdbMovie => {
     showTimes: ['2:30 PM', '5:45 PM', '9:00 PM', '11:30 PM'],
   };
 };
-
-export const getMovies = () =>
-  tmdbNowPlayingMock.results.map(adaptTmdbToMovie);
